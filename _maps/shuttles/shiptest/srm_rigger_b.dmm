@@ -406,11 +406,11 @@
 /area/ship/maintenance/starboard)
 "hn" = (
 /obj/machinery/door/window/brigdoor/security/cell/eastright{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	req_one_access_txt = "2;22"
 	},
 /obj/machinery/flasher{
-	base_id = "Cell2B";
+	id = "Cell2B";
 	pixel_x = -25
 	},
 /turf/open/floor/wood/maple,
@@ -3568,7 +3568,7 @@
 /area/ship/engineering)
 "SU" = (
 /obj/machinery/door_timer{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	pixel_y = 32
 	},
 /turf/open/floor/wood/yew,

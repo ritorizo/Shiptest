@@ -283,7 +283,7 @@
 /area/ruin/unpowered/syndicate_lava_base/engineering)
 "cK" = (
 /obj/machinery/power/compressor{
-	comp_base_id = "syndie_lavaland_incineratorturbine";
+	comp_id = "syndie_lavaland_incineratorturbine";
 	dir = 1;
 	luminosity = 2
 	},
@@ -4115,7 +4115,7 @@
 /obj/machinery/atmospherics/pipe/simple/yellow,
 /obj/machinery/computer/turbine_computer{
 	dir = 1;
-	base_id = "syndie_lavaland_incineratorturbine"
+	id = "syndie_lavaland_incineratorturbine"
 	},
 /turf/open/floor/plasteel,
 /area/ruin/unpowered/syndicate_lava_base/engineering)
@@ -4647,7 +4647,7 @@
 "oB" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	base_id = "syndie_lavaland_inc_in"
+	id = "syndie_lavaland_inc_in"
 	},
 /obj/structure/sign/warning/vacuum/external{
 	pixel_y = -32

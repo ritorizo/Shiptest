@@ -220,7 +220,7 @@
 "mg" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "pirate_porttube"
+	id = "pirate_porttube"
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/sign/warning/deathsposal{
@@ -348,7 +348,7 @@
 "nQ" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "pirate_stbdtube"
+	id = "pirate_stbdtube"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4{
 	dir = 4

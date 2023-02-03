@@ -483,7 +483,7 @@
 /area/ship/engineering/engine)
 "eV" = (
 /obj/machinery/mass_driver{
-	base_id = "ejected"
+	id = "ejected"
 	},
 /obj/structure/window/reinforced/spawner{
 	dir = 8
@@ -4044,7 +4044,7 @@
 	pixel_y = 8
 	},
 /obj/item/reagent_containers/glass/bottle{
-	list_reagents = list(/datum/reagent/medicine/thializbase_id = 30);
+	list_reagents = list(/datum/reagent/medicine/thializid = 30);
 	name = "thializid bottle"
 	},
 /obj/item/reagent_containers/syringe,

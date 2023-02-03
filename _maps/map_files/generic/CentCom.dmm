@@ -56,7 +56,7 @@
 /area/tdome/arena_source)
 "afP" = (
 /obj/machinery/flasher{
-	base_id = "tdomeflash";
+	id = "tdomeflash";
 	name = "Thunderdome Flash"
 	},
 /turf/open/floor/circuit/green,
@@ -3550,7 +3550,7 @@
 /area/tdome/arena)
 "aJj" = (
 /obj/machinery/flasher{
-	base_id = "tdomeflash";
+	id = "tdomeflash";
 	name = "Thunderdome Flash"
 	},
 /turf/open/floor/circuit/green,
@@ -7327,7 +7327,7 @@
 	},
 /obj/machinery/conveyor/inverted{
 	dir = 6;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)
@@ -8031,7 +8031,7 @@
 /obj/effect/turf_decal/industrial/warning,
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)
@@ -8240,7 +8240,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "XCCQMLoad"
+	id = "XCCQMLoad"
 	},
 /obj/effect/turf_decal/industrial/warning/cee{
 	dir = 8
@@ -8291,7 +8291,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)
@@ -9157,7 +9157,7 @@
 /obj/structure/plasticflaps,
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "XCCQMLoad"
+	id = "XCCQMLoad"
 	},
 /obj/effect/turf_decal/industrial/warning,
 /turf/open/floor/plasteel,
@@ -11774,7 +11774,7 @@
 /obj/effect/turf_decal/industrial/warning,
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)
@@ -12234,7 +12234,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "XCCQMLoad"
+	id = "XCCQMLoad"
 	},
 /obj/effect/turf_decal/industrial/warning,
 /turf/open/floor/plasteel,
@@ -13604,7 +13604,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)
@@ -13929,7 +13929,7 @@
 /area/tdome/arena_source)
 "rLV" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "XCCQMLoad2";
+	id = "XCCQMLoad2";
 	pixel_x = 6
 	},
 /obj/effect/turf_decal/corner/opaque/brown{
@@ -15816,7 +15816,7 @@
 "wvj" = (
 /obj/machinery/conveyor_switch/oneway{
 	dir = 8;
-	base_id = "XCCQMLoad";
+	id = "XCCQMLoad";
 	pixel_x = 6
 	},
 /obj/effect/turf_decal/corner/opaque/brown{
@@ -16235,7 +16235,7 @@
 /obj/effect/turf_decal/industrial/warning/cee,
 /obj/machinery/conveyor/inverted{
 	dir = 10;
-	base_id = "XCCQMLoad2"
+	id = "XCCQMLoad2"
 	},
 /turf/open/floor/plasteel,
 /area/centcom/supply)

@@ -4248,7 +4248,7 @@
 /area/awaymission/undergroundoutpost45/engineering)
 "pF" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
-	base_id = "UO45_air_in"
+	id = "UO45_air_in"
 	},
 /turf/open/floor/engine/air,
 /area/awaymission/undergroundoutpost45/engineering)
@@ -5520,7 +5520,7 @@
 "te" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 8;
-	base_id = "UO45_mix_in"
+	id = "UO45_mix_in"
 	},
 /turf/open/floor/engine/vacuum,
 /area/awaymission/undergroundoutpost45/engineering)
@@ -6245,7 +6245,7 @@
 "vd" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	base_id = "UO45_n2_in"
+	id = "UO45_n2_in"
 	},
 /turf/open/floor/engine/n2,
 /area/awaymission/undergroundoutpost45/engineering)
@@ -6260,7 +6260,7 @@
 "vf" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	base_id = "UO45_o2_in"
+	id = "UO45_o2_in"
 	},
 /turf/open/floor/engine/o2,
 /area/awaymission/undergroundoutpost45/engineering)
@@ -7027,7 +7027,7 @@
 /area/awaymission/undergroundoutpost45/mining)
 "xs" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "UO45_mining";
+	id = "UO45_mining";
 	name = "mining conveyor"
 	},
 /turf/open/floor/plasteel{
@@ -8150,7 +8150,7 @@
 "Az" = (
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -8159,7 +8159,7 @@
 	dir = 4
 	},
 /obj/machinery/conveyor{
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/machinery/light/small{
 	dir = 8
@@ -9682,13 +9682,13 @@
 "Hy" = (
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/effect/turf_decal/industrial/warning{
 	dir = 4
 	},
 /obj/machinery/conveyor{
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/effect/turf_decal/industrial/warning{
 	dir = 4
@@ -11577,7 +11577,7 @@
 "NX" = (
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/structure/sign/warning/nosmoking{
 	pixel_x = -32
@@ -11586,7 +11586,7 @@
 	dir = 4
 	},
 /obj/machinery/conveyor{
-	base_id = "UO45_mining"
+	id = "UO45_mining"
 	},
 /obj/structure/sign/warning/nosmoking{
 	pixel_x = -32

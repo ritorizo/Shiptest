@@ -28,7 +28,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 5;
-	base_id = "slimer"
+	id = "slimer"
 	},
 /turf/open/floor/circuit/telecomms{
 	name = "coldroom"
@@ -756,7 +756,7 @@
 	dir = 8
 	},
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "slimer"
+	id = "slimer"
 	},
 /obj/machinery/button/door{
 	base_id = "slimelock";
@@ -2504,7 +2504,7 @@
 /mob/living/simple_animal/slime,
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "slimer"
+	id = "slimer"
 	},
 /turf/open/floor/circuit/telecomms{
 	name = "coldroom"
@@ -3499,7 +3499,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "slimer"
+	id = "slimer"
 	},
 /turf/open/floor/circuit/telecomms{
 	name = "coldroom"
@@ -3829,7 +3829,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "slimer"
+	id = "slimer"
 	},
 /obj/machinery/camera/autoname{
 	dir = 5

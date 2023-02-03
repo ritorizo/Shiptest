@@ -2062,7 +2062,7 @@
 /obj/item/bedsheet/grey,
 /obj/effect/turf_decal/corner/opaque/grey/diagonal,
 /obj/machinery/flasher{
-	base_id = "minuteman_cell1";
+	id = "minuteman_cell1";
 	pixel_x = -25
 	},
 /turf/open/floor/plasteel/dark,

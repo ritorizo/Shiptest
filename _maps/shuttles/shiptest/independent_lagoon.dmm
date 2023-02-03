@@ -4444,7 +4444,7 @@
 	dir = 8
 	},
 /obj/machinery/conveyor{
-	base_id = "cruise_conveyor"
+	id = "cruise_conveyor"
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 8
@@ -7094,7 +7094,7 @@
 "Va" = (
 /obj/machinery/door/window/westright,
 /obj/machinery/conveyor{
-	base_id = "cruise_conveyor"
+	id = "cruise_conveyor"
 	},
 /obj/structure/plasticflaps,
 /turf/open/floor/plating,
@@ -7303,7 +7303,7 @@
 /area/ship/crew/canteen)
 "Wm" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "cruise_conveyor"
+	id = "cruise_conveyor"
 	},
 /obj/machinery/button/door{
 	base_id = "cruise_disposals";
@@ -7662,7 +7662,7 @@
 	name = "Disposals Blast Door"
 	},
 /obj/machinery/conveyor{
-	base_id = "cruise_conveyor"
+	id = "cruise_conveyor"
 	},
 /turf/open/floor/plating,
 /area/ship/crew/janitor)

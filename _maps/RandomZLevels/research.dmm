@@ -184,7 +184,7 @@
 "aJ" = (
 /obj/machinery/computer/pod{
 	dir = 1;
-	base_id = "spacebattlepod2";
+	id = "spacebattlepod2";
 	name = "Hull Door Control"
 	},
 /turf/open/floor/mineral/plastitanium/red,

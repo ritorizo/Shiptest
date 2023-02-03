@@ -722,7 +722,7 @@
 /area/ship/crew/hydroponics)
 "gJ" = (
 /obj/machinery/mass_driver{
-	base_id = "chapel_massdriver";
+	id = "chapel_massdriver";
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/eastright,
@@ -2513,7 +2513,7 @@
 "wx" = (
 /obj/machinery/computer/pod{
 	dir = 2;
-	base_id = "chapel_massdriver"
+	id = "chapel_massdriver"
 	},
 /obj/machinery/firealarm{
 	pixel_y = 26

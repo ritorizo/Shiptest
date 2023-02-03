@@ -3968,7 +3968,7 @@
 /area/awaymission/academy/academycellar)
 "kW" = (
 /obj/structure/ladder/unbreakable/rune{
-	base_id = "academy_cellar"
+	id = "academy_cellar"
 	},
 /turf/open/floor/engine/cult,
 /area/awaymission/academy/academycellar)
@@ -4151,7 +4151,7 @@
 /area/awaymission/academy/academyengine)
 "lI" = (
 /obj/structure/ladder/unbreakable/rune{
-	base_id = "academy_engine"
+	id = "academy_engine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/academy/academyengine)
@@ -4230,14 +4230,14 @@
 "lW" = (
 /obj/structure/ladder/unbreakable/rune{
 	height = 1;
-	base_id = "academy_storage"
+	id = "academy_storage"
 	},
 /turf/open/floor/plating,
 /area/awaymission/academy/classrooms)
 "lX" = (
 /obj/structure/ladder/unbreakable/rune{
 	height = 1;
-	base_id = "academy_coldroom"
+	id = "academy_coldroom"
 	},
 /turf/open/floor/plasteel/white,
 /area/awaymission/academy/classrooms)
@@ -4253,14 +4253,14 @@
 "ma" = (
 /obj/structure/ladder/unbreakable/rune{
 	height = 1;
-	base_id = "academy_cellar"
+	id = "academy_cellar"
 	},
 /turf/open/floor/wood,
 /area/awaymission/academy/classrooms)
 "mb" = (
 /obj/structure/ladder/unbreakable/rune{
 	height = 1;
-	base_id = "academy_engine"
+	id = "academy_engine"
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/academy/academyaft)
@@ -4447,7 +4447,7 @@
 /area/awaymission/academy/academygate)
 "mQ" = (
 /obj/structure/ladder/unbreakable/rune{
-	base_id = "academy_storage"
+	id = "academy_storage"
 	},
 /turf/open/floor/plasteel,
 /area/awaymission/academy/academyengine)
@@ -4457,7 +4457,7 @@
 /area/awaymission/academy/academyengine)
 "mS" = (
 /obj/structure/ladder/unbreakable/rune{
-	base_id = "academy_coldroom"
+	id = "academy_coldroom"
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/academy/academycellar)

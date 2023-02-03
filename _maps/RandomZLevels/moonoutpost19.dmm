@@ -978,7 +978,7 @@
 "ep" = (
 /obj/machinery/sparker{
 	desc = "A wall-mounted ignition device. This one has been applied with an acid-proof coating.";
-	base_id = "awayxenobio";
+	id = "awayxenobio";
 	name = "Acid-Proof mounted igniter";
 	pixel_y = 25
 	},
@@ -1475,7 +1475,7 @@
 "hc" = (
 /obj/machinery/sparker{
 	desc = "A wall-mounted ignition device. This one has been applied with an acid-proof coating.";
-	base_id = "awayxenobio";
+	id = "awayxenobio";
 	name = "Acid-Proof mounted igniter";
 	pixel_y = -25
 	},
@@ -4682,7 +4682,7 @@
 /area/awaymission/moonoutpost19/syndicate)
 "CQ" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "awaysyndie";
+	id = "awaysyndie";
 	layer = 3.1;
 	name = "mining conveyor"
 	},
@@ -5604,7 +5604,7 @@
 /area/awaymission/moonoutpost19/arrivals)
 "LF" = (
 /obj/machinery/conveyor{
-	base_id = "awaysyndie"
+	id = "awaysyndie"
 	},
 /obj/effect/turf_decal/industrial/warning{
 	dir = 4

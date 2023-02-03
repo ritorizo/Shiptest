@@ -432,7 +432,7 @@
 "eF" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "corpse"
+	id = "corpse"
 	},
 /obj/structure/chair/office{
 	dir = 1

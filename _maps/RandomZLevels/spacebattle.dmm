@@ -248,7 +248,7 @@
 "bj" = (
 /obj/machinery/computer/pod{
 	dir = 1;
-	base_id = "spacebattlepod3";
+	id = "spacebattlepod3";
 	name = "Hull Door Control"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -432,7 +432,7 @@
 "cb" = (
 /obj/machinery/computer/pod{
 	dir = 1;
-	base_id = "spacebattlepod";
+	id = "spacebattlepod";
 	name = "Hull Door Control"
 	},
 /turf/open/floor/mineral/plastitanium/red,
@@ -720,7 +720,7 @@
 "dc" = (
 /obj/machinery/computer/pod{
 	dir = 1;
-	base_id = "spacebattlepod2";
+	id = "spacebattlepod2";
 	name = "Hull Door Control"
 	},
 /turf/open/floor/mineral/plastitanium/red,

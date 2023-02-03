@@ -355,7 +355,7 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/security/cell/eastright{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	req_one_access_txt = "2"
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
@@ -363,7 +363,7 @@
 	dir = 4
 	},
 /obj/machinery/flasher{
-	base_id = "Cell1B";
+	id = "Cell1B";
 	pixel_x = -25
 	},
 /turf/open/floor/plasteel/dark,
@@ -407,7 +407,7 @@
 	dir = 8
 	},
 /obj/machinery/door/window/brigdoor/security/cell/eastright{
-	base_id = "Cell 2";
+	id = "Cell 2";
 	req_one_access_txt = "2"
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
@@ -415,7 +415,7 @@
 	dir = 4
 	},
 /obj/machinery/flasher{
-	base_id = "Cell2B";
+	id = "Cell2B";
 	pixel_x = -25
 	},
 /turf/open/floor/plasteel/dark,
@@ -3738,7 +3738,7 @@
 /area/ship/engineering)
 "SU" = (
 /obj/machinery/door_timer{
-	base_id = "Cell 2";
+	id = "Cell 2";
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/nanoweave/red,
@@ -3868,7 +3868,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door_timer{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	pixel_y = -32
 	},
 /turf/open/floor/carpet/nanoweave/red,

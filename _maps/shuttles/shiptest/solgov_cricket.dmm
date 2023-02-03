@@ -1077,7 +1077,7 @@
 "mH" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4,
 /obj/machinery/flasher{
-	base_id = "Holding Cell";
+	id = "Holding Cell";
 	pixel_y = 22
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
@@ -1349,7 +1349,7 @@
 /area/ship/engineering/engine)
 "pt" = (
 /obj/machinery/door/window/brigdoor/security/cell/westleft{
-	base_id = "Holding Cell"
+	id = "Holding Cell"
 	},
 /obj/machinery/door/firedoor/border_only{
 	dir = 4
@@ -2490,7 +2490,7 @@
 /area/ship/medical)
 "Cx" = (
 /obj/structure/closet/secure_closet/brig{
-	base_id = "sgbrig"
+	id = "sgbrig"
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
 /turf/open/floor/plasteel/dark,
@@ -4495,7 +4495,7 @@
 	network = list("cricket")
 	},
 /obj/machinery/door_timer{
-	base_id = "Holding Cell";
+	id = "Holding Cell";
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/nanoweave/red,

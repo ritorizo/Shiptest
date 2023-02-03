@@ -227,7 +227,7 @@
 /obj/structure/window/reinforced,
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "trektorpedo2";
+	id = "trektorpedo2";
 	name = "photon torpedo tube"
 	},
 /obj/item/toy/minimeteor{

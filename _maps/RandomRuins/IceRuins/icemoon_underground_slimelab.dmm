@@ -1967,7 +1967,7 @@
 /area/ruin/powered/slimelab/lab)
 "vA" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "slimelab"
+	id = "slimelab"
 	},
 /obj/structure/spacevine/dense{
 	pixel_y = -32
@@ -2154,7 +2154,7 @@
 "xo" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "slimelab"
+	id = "slimelab"
 	},
 /obj/machinery/disposal/deliveryChute{
 	dir = 8;
@@ -2259,7 +2259,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "slimelab"
+	id = "slimelab"
 	},
 /obj/structure/disposalpipe/trunk{
 	dir = 1
@@ -2881,7 +2881,7 @@
 "Ei" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "slimelab"
+	id = "slimelab"
 	},
 /obj/effect/mob_spawn/slime,
 /turf/open/floor/plating/snowed,
@@ -3575,7 +3575,7 @@
 "Ml" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "slimelab"
+	id = "slimelab"
 	},
 /turf/open/floor/plating/snowed,
 /area/ruin/unpowered)

@@ -198,7 +198,7 @@
 "bD" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starlauncherone"
+	id = "starlauncherone"
 	},
 /obj/machinery/light/small/broken{
 	dir = 8
@@ -243,7 +243,7 @@
 	dir = 1
 	},
 /obj/machinery/flasher{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	pixel_x = 25
 	},
 /obj/structure/cable/orange{
@@ -1148,7 +1148,7 @@
 "io" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starlaunchertwo"
+	id = "starlaunchertwo"
 	},
 /turf/open/floor/plating/rust,
 /area/ruin/jungle/interceptor/starlaunchertwo)
@@ -3053,7 +3053,7 @@
 "zq" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starlauncherone"
+	id = "starlauncherone"
 	},
 /turf/open/floor/plating/rust,
 /area/ruin/jungle/interceptor/starlauncherone)
@@ -3383,7 +3383,7 @@
 "Cj" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "portlauncherone"
+	id = "portlauncherone"
 	},
 /turf/open/floor/plating,
 /area/ruin/jungle/interceptor/crashsite)
@@ -5155,7 +5155,7 @@
 "Rv" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starlaunchertwo"
+	id = "starlaunchertwo"
 	},
 /obj/machinery/light/small/broken{
 	dir = 8

@@ -1366,7 +1366,7 @@
 /area/awaymission/cabin/snowforest)
 "eK" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "lumbermill"
+	id = "lumbermill"
 	},
 /obj/effect/turf_decal/industrial/fire,
 /turf/open/floor/plating/snowed/temperatre,
@@ -1411,7 +1411,7 @@
 "eR" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "lumbermill"
+	id = "lumbermill"
 	},
 /obj/effect/turf_decal/industrial/fire/fulltile,
 /turf/open/floor/plating/snowed/temperatre,
@@ -1422,7 +1422,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "lumbermill"
+	id = "lumbermill"
 	},
 /obj/effect/turf_decal/industrial/fire/fulltile,
 /obj/effect/decal/cleanable/blood/old,
@@ -1679,7 +1679,7 @@
 	color = "#000000";
 	desc = "Examining things is a good idea after all.";
 	height = 1;
-	base_id = "TheRealSecretPlace";
+	id = "TheRealSecretPlace";
 	name = "\improper Tear In The Fabric of Reality"
 	},
 /obj/structure/plaque/static_plaque/golden{
@@ -2095,7 +2095,7 @@
 	color = "#000000";
 	desc = "It is time to bust out of this joint";
 	height = 1;
-	base_id = "whatkindofnerdusesmapmakertocheattheirwaytoateleportrune";
+	id = "whatkindofnerdusesmapmakertocheattheirwaytoateleportrune";
 	mouse_opacity = 0;
 	name = "\improper secret escape route"
 	},
@@ -2497,7 +2497,7 @@
 	desc = "EXAMINING THAT WAS A MISTAKE!";
 	height = 0;
 	icon_state = "7";
-	base_id = "TheRealSecretPlace";
+	id = "TheRealSecretPlace";
 	light_range = 10;
 	mouse_opacity = 0;
 	name = "\improper void"
@@ -3985,7 +3985,7 @@
 	desc = "Get me out of this boring room.";
 	height = 1;
 	icon_state = "hierophant";
-	base_id = "GETMEOUTOFHEREYOUFUCKS";
+	id = "GETMEOUTOFHEREYOUFUCKS";
 	name = "\improper Return Rune"
 	},
 /turf/open/floor/plating/asteroid/snow,
@@ -4236,7 +4236,7 @@
 "lC" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "lumbermill"
+	id = "lumbermill"
 	},
 /obj/effect/turf_decal/industrial/fire/fulltile,
 /obj/structure/barricade/wooden/snowed,
@@ -4246,7 +4246,7 @@
 /obj/structure/ladder/unbreakable/rune{
 	desc = "I want out of this spookfest.";
 	icon_state = "hierophant";
-	base_id = "GETMEOUTOFHEREYOUFUCKS";
+	id = "GETMEOUTOFHEREYOUFUCKS";
 	name = "\improper Emergency Escape Rune"
 	},
 /turf/open/floor/plating/asteroid/snow,
@@ -4757,7 +4757,7 @@
 /obj/structure/ladder/unbreakable/rune{
 	color = "#ff0000";
 	desc = "ONE HUNDRED AND TEN PERCENT REAL.";
-	base_id = "whatkindofnerdusesmapmakertocheattheirwaytoateleportrune";
+	id = "whatkindofnerdusesmapmakertocheattheirwaytoateleportrune";
 	name = "\improper TOTALLY LEGIT PORTAL OF FUN"
 	},
 /turf/open/floor/mineral/plastitanium/red{
@@ -4957,7 +4957,7 @@
 	desc = "Finally.";
 	height = 0;
 	icon_state = "ladder10";
-	base_id = "whyisitcalledladder10andnotladder1";
+	id = "whyisitcalledladder10andnotladder1";
 	name = "Freedom"
 	},
 /obj/effect/light_emitter{
@@ -5000,7 +5000,7 @@
 	height = 1;
 	icon = 'icons/obj/structures.dmi';
 	icon_state = "ladder01";
-	base_id = "dealwentoffwithoutahitchBRO";
+	id = "dealwentoffwithoutahitchBRO";
 	name = "Grate";
 	pixel_y = -10
 	},
@@ -5061,7 +5061,7 @@
 	desc = "Finally.";
 	height = 1;
 	icon_state = "";
-	base_id = "whyisitcalledladder10andnotladder1";
+	id = "whyisitcalledladder10andnotladder1";
 	mouse_opacity = 0;
 	name = ""
 	},
@@ -5073,7 +5073,7 @@
 	desc = "Yeah, I'll just go back to jail instead of this. It's not like there is an escape out of here, right?";
 	height = 0;
 	icon_state = "ladder10";
-	base_id = "dealwentoffwithoutahitchBRO";
+	id = "dealwentoffwithoutahitchBRO";
 	name = "Sewer Ladder"
 	},
 /turf/open/indestructible/hoteltile,

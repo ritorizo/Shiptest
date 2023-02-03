@@ -167,7 +167,7 @@
 "au" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "1984"
+	id = "1984"
 	},
 /obj/machinery/mineral/stacking_machine,
 /obj/machinery/door/firedoor,
@@ -188,7 +188,7 @@
 	pixel_y = 26
 	},
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "1984";
+	id = "1984";
 	pixel_x = 5;
 	pixel_y = -10
 	},
@@ -397,7 +397,7 @@
 "aQ" = (
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "1984"
+	id = "1984"
 	},
 /obj/effect/turf_decal/weather,
 /turf/open/floor/plating,
@@ -482,7 +482,7 @@
 "aV" = (
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "1984"
+	id = "1984"
 	},
 /turf/open/floor/plating,
 /area/ship/cargo)
@@ -615,7 +615,7 @@
 "bi" = (
 /obj/effect/turf_decal/weather,
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "1984";
+	id = "1984";
 	pixel_x = -12;
 	pixel_y = 8
 	},
@@ -828,7 +828,7 @@
 "bN" = (
 /obj/machinery/conveyor/inverted{
 	dir = 6;
-	base_id = "1984"
+	id = "1984"
 	},
 /turf/open/floor/plating,
 /area/ship/cargo)
@@ -2554,7 +2554,7 @@
 "Je" = (
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "1984"
+	id = "1984"
 	},
 /obj/machinery/mineral/processing_unit{
 	input_dir = 2;
@@ -2723,7 +2723,7 @@
 /obj/effect/turf_decal/weather,
 /obj/machinery/conveyor{
 	dir = 1;
-	base_id = "1984"
+	id = "1984"
 	},
 /obj/machinery/mineral/unloading_machine{
 	input_dir = 2;

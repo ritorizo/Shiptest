@@ -2654,7 +2654,7 @@
 /mob/living/simple_animal/bot/mulebot{
 	bot_name = "\proper Christine";
 	desc = "A Multiple Utility Load Effector bot. This one seems oddly menacing...";
-	base_id = "Christine";
+	id = "Christine";
 	name = "\proper Christine"
 	},
 /obj/machinery/navbeacon/wayfinding{

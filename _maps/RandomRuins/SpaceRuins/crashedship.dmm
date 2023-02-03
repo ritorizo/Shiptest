@@ -1321,14 +1321,14 @@
 "dP" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "meatConvey1"
+	id = "meatConvey1"
 	},
 /turf/open/floor/plating,
 /area/awaymission/BMPship/Midship)
 "dQ" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "meatConvey1"
+	id = "meatConvey1"
 	},
 /obj/structure/plasticflaps,
 /turf/open/floor/plating,
@@ -1483,7 +1483,7 @@
 /area/awaymission/BMPship/Midship)
 "el" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "meatConvey1"
+	id = "meatConvey1"
 	},
 /obj/effect/turf_decal/corner/transparent/bar,
 /obj/effect/turf_decal/corner/transparent/bar{
@@ -1845,7 +1845,7 @@
 "fi" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "meatConvey2"
+	id = "meatConvey2"
 	},
 /obj/item/kitchen/knife,
 /turf/open/floor/plating,
@@ -1853,7 +1853,7 @@
 "fj" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "meatConvey2"
+	id = "meatConvey2"
 	},
 /obj/structure/plasticflaps,
 /turf/open/floor/plating,
@@ -1861,7 +1861,7 @@
 "fk" = (
 /obj/machinery/conveyor{
 	dir = 4;
-	base_id = "meatConvey2"
+	id = "meatConvey2"
 	},
 /turf/open/floor/plating,
 /area/awaymission/BMPship/Midship)
@@ -1973,7 +1973,7 @@
 /area/awaymission/BMPship/Midship)
 "fB" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "meatConvey2"
+	id = "meatConvey2"
 	},
 /obj/effect/turf_decal/corner/transparent/bar,
 /obj/effect/turf_decal/corner/transparent/bar{

@@ -1284,7 +1284,7 @@
 "dY" = (
 /obj/structure/ladder/unbreakable{
 	height = 1;
-	base_id = "snowdin"
+	id = "snowdin"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/dorm)
@@ -5646,14 +5646,14 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/igniter{
-	base_id = "snowdin_turbine_ignitor"
+	id = "snowdin_turbine_ignitor"
 	},
 /turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/post/engineering)
 "sC" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	base_id = "snowdin_incin_in"
+	id = "snowdin_incin_in"
 	},
 /turf/open/floor/engine/vacuum,
 /area/awaymission/snowdin/post/engineering)
@@ -5668,7 +5668,7 @@
 /area/awaymission/snowdin/outside)
 "sM" = (
 /obj/machinery/power/compressor{
-	comp_base_id = "snowdin_turbine";
+	comp_id = "snowdin_turbine";
 	dir = 1;
 	luminosity = 2
 	},
@@ -6399,7 +6399,7 @@
 "vG" = (
 /obj/machinery/atmospherics/components/unary/outlet_injector/atmos{
 	dir = 1;
-	base_id = "snowdin_incin_in"
+	id = "snowdin_incin_in"
 	},
 /turf/open/floor/plating/snowed/cavern,
 /area/awaymission/snowdin/post/cavern1)
@@ -8774,7 +8774,7 @@
 "FY" = (
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /obj/machinery/light/small{
 	dir = 4
@@ -8858,7 +8858,7 @@
 /obj/structure/plasticflaps,
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
@@ -8986,7 +8986,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
@@ -9080,7 +9080,7 @@
 "Hk" = (
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
@@ -9187,7 +9187,7 @@
 	},
 /obj/machinery/conveyor{
 	dir = 2;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
@@ -9465,21 +9465,21 @@
 /obj/structure/plasticflaps,
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "Jg" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
 "Jh" = (
 /obj/machinery/conveyor{
 	dir = 10;
-	base_id = "snowdin_belt_mine"
+	id = "snowdin_belt_mine"
 	},
 /turf/open/floor/plating,
 /area/awaymission/snowdin/post/mining_dock)
@@ -12887,7 +12887,7 @@
 "Sp" = (
 /obj/effect/turf_decal/industrial/warning/corner,
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "snowdin_belt_mine";
+	id = "snowdin_belt_mine";
 	name = "mining conveyor"
 	},
 /turf/open/floor/plating/asteroid/snow/ice,
@@ -15832,7 +15832,7 @@
 "ZE" = (
 /obj/machinery/computer/turbine_computer{
 	dir = 1;
-	base_id = "snowdin_turbine"
+	id = "snowdin_turbine"
 	},
 /obj/structure/cable{
 	icon_state = "4-8"

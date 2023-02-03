@@ -219,7 +219,7 @@
 "mg" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "pirate_porttube"
+	id = "pirate_porttube"
 	},
 /obj/effect/turf_decal/box,
 /obj/structure/sign/warning/deathsposal{
@@ -340,7 +340,7 @@
 "nQ" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "pirate_stbdtube"
+	id = "pirate_stbdtube"
 	},
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4{
 	dir = 4
@@ -1241,7 +1241,7 @@
 "Ks" = (
 /obj/machinery/door/window/brigdoor/security/cell/eastright{
 	dir = 8;
-	base_id = "Cell 1";
+	id = "Cell 1";
 	req_one_access_txt = "2"
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
@@ -1256,7 +1256,7 @@
 	dir = 4
 	},
 /obj/machinery/flasher{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	pixel_x = 25
 	},
 /obj/effect/turf_decal/corner/opaque/red/diagonal,
@@ -1390,7 +1390,7 @@
 /area/ship/cargo)
 "Nz" = (
 /obj/machinery/door_timer{
-	base_id = "Cell 1";
+	id = "Cell 1";
 	pixel_x = 32
 	},
 /turf/open/floor/plasteel/dark,

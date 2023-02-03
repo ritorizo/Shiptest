@@ -337,7 +337,7 @@
 	dir = 1
 	},
 /obj/machinery/igniter/incinerator_atmos{
-	base_id = "TEG_igniter"
+	id = "TEG_igniter"
 	},
 /turf/open/floor/engine/airless,
 /area/ship/engineering/engine)
@@ -891,7 +891,7 @@
 	name = "TEG Burn-Chamber Scrubber"
 	},
 /obj/machinery/igniter/incinerator_atmos{
-	base_id = "TEG_igniter"
+	id = "TEG_igniter"
 	},
 /obj/machinery/air_sensor/atmos/incinerator_tank,
 /obj/structure/disposalpipe/segment{

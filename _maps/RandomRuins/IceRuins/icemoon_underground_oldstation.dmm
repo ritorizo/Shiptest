@@ -3506,7 +3506,7 @@
 /obj/structure/cable,
 /obj/machinery/power/solar_control{
 	dir = 1;
-	base_id = "aftport";
+	id = "aftport";
 	name = "Station Solar Control"
 	},
 /turf/open/floor/plasteel,
@@ -5705,7 +5705,7 @@
 /area/ruin/space/has_grav/ancientstation)
 "mA" = (
 /obj/machinery/conveyor{
-	base_id = "beta"
+	id = "beta"
 	},
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/ancientstation/mining)
@@ -5757,7 +5757,7 @@
 /area/ruin/space/has_grav/ancientstation/rnd)
 "mJ" = (
 /obj/machinery/conveyor_switch/oneway{
-	base_id = "beta";
+	id = "beta";
 	pixel_x = 9
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -5767,7 +5767,7 @@
 "mK" = (
 /obj/machinery/conveyor{
 	dir = 10;
-	base_id = "beta"
+	id = "beta"
 	},
 /turf/open/floor/plating,
 /area/ruin/space/has_grav/ancientstation/mining)
@@ -5887,7 +5887,7 @@
 "mU" = (
 /obj/machinery/conveyor{
 	dir = 8;
-	base_id = "beta"
+	id = "beta"
 	},
 /obj/structure/plasticflaps,
 /obj/effect/turf_decal/corner/opaque/brown{

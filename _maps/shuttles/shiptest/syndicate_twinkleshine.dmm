@@ -102,7 +102,7 @@
 "bt" = (
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starfurybc_massleft"
+	id = "starfurybc_massleft"
 	},
 /obj/machinery/door/window{
 	name = "Cannon Access";
@@ -223,7 +223,7 @@
 	},
 /obj/machinery/mass_driver{
 	dir = 1;
-	base_id = "starfurybc_massright"
+	id = "starfurybc_massright"
 	},
 /turf/open/floor/plating,
 /area/ship/bridge)
