@@ -4,8 +4,7 @@
 	implements = list(
 		TOOL_SCREWDRIVER		= 100,
 		TOOL_SCALPEL 			= 75, // med borgs could try to unscrew shell with scalpel
-		/obj/item/kitchen/knife	= 50,
-		/obj/item				= 10) // 10% success with any sharp item.
+		/obj/item/kitchen/knife	= 50)
 	time = 2.4 SECONDS
 	preop_sound = 'sound/items/screwdriver.ogg'
 	success_sound = 'sound/items/screwdriver2.ogg'
@@ -28,7 +27,7 @@
 	implements = list(
 		TOOL_SCREWDRIVER		= 100,
 		TOOL_SCALPEL 			= 75,
-		/obj/item/kitchen/knife	= 50,
+		/obj/item/kitchen/knife	= 50)
 	time = 2.4 SECONDS
 	preop_sound = 'sound/items/screwdriver.ogg'
 	success_sound = 'sound/items/screwdriver2.ogg'
