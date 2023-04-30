@@ -19,6 +19,11 @@
 		return FALSE
 	return isipc(target)
 
+/datum/surgery_step/revive/ipc/success(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery, default_display_results)
+	if(target.getToxLoss() > 120)
+		target.setToxLoss(95)
+	. = ..()
+
 /datum/surgery_step/revive/ipc
 	name = "reboot electronics"
 	implements = list(/obj/item/inducer = 100, /obj/item/shockpaddles = 80, /obj/item/melee/baton = 50, /obj/item/gun/energy = 30)
@@ -30,5 +35,3 @@
 		var/obj/item/inducer/I = tool
 		if(I.cantbeused(user))
 			return FALSE
-
-
