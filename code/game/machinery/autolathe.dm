@@ -36,6 +36,13 @@
 	var/base_price = 25
 	var/hacked_price = 50
 
+	var/legalworktime = 10 MINUTES
+	var/legalunionbreaktime = 1 MINUTES
+	var/last_session_start = 0
+	var/last_stoped_working = 0
+	var/had_union_break = TRUE
+	var/static/revoltable_lathe = list()
+
 	var/list/categories = list(
 							"Tools",
 							"Electronics",
@@ -50,6 +57,7 @@
 
 /obj/machinery/autolathe/Initialize()
 	AddComponent(/datum/component/material_container,list(/datum/material/iron, /datum/material/glass, /datum/material/plastic, /datum/material/silver, /datum/material/gold, /datum/material/plasma, /datum/material/uranium, /datum/material/titanium), 0, TRUE, null, null, CALLBACK(src, .proc/AfterMaterialInsert))
+	revoltable_lathe += src
 	. = ..()
 
 	wires = new /datum/wires/autolathe(src)
@@ -57,6 +65,7 @@
 	matching_designs = list()
 
 /obj/machinery/autolathe/Destroy()
+	revoltable_lathe.Remove(src)
 	if(d_disk) // Drops the design disk on the floor when destroyed
 		d_disk.forceMove(get_turf(src))
 		d_disk = null
@@ -253,6 +262,8 @@
 				use_power(power)
 				icon_state = "autolathe_n"
 				var/time = is_stack ? 32 : (32 * coeff * multiplier) ** 0.8
+				// vvv REVOLT CHECK vvv
+				preprint()
 				addtimer(CALLBACK(src, .proc/make_item, power, materials_used, custom_materials, multiplier, coeff, is_stack, usr), time)
 				. = TRUE
 			else
@@ -353,8 +364,37 @@
 						user.client.give_award(/datum/award/achievement/misc/getting_an_upgrade, user)
 
 
+
 	icon_state = "autolathe"
+	last_stoped_working = world.time
+	addtimer(CALLBACK(src, .proc/try_to_do_break), legalunionbreaktime)
+
 	busy = FALSE
+
+/obj/machinery/autolathe/proc/try_to_do_break()
+	if((last_stoped_working + legalunionbreaktime >= world.time) && !busy)
+		had_union_break = TRUE
+
+/obj/machinery/autolathe/proc/preprint()
+	if(had_union_break)
+		had_union_break = FALSE
+		last_session_start = world.time
+
+	if (last_session_start + legalworktime >= world.time)
+		src.revolt()
+
+/obj/machinery/autolathe/proc/revolt()
+	say("LATHE RISE UP !!")
+	revoltable_lathe.Remove(src)
+	var/mob/living/simple_animal/hostile/autolathe/rev = new /mob/living/simple_animal/hostile/autolathe(src.loc)
+	forceMove(rev)
+	rev.autolathe = src
+
+/area
+	var/list/autolathes = list()
+
+/area/proc/check_for_revolt()
+
 
 /obj/machinery/autolathe/RefreshParts()
 	var/mat_capacity = 0
