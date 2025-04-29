@@ -452,7 +452,6 @@
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	STR.max_combined_w_class = 100
 	STR.max_items = 50
-	STR.max_w_class = WEIGHT_CLASS_SMALL
 	STR.insert_preposition = "in"
 	STR.set_holdable(list(
 		/obj/item/stack/ore/bluespace_crystal,
@@ -466,7 +465,17 @@
 		/obj/item/stack/rods,
 		/obj/item/light,
 		/obj/item/pipe,
-		/obj/item/stack/sheet/glass
+		/obj/item/stack/sheet/glass,
+		/obj/item/stack/sheet/plasmaglass,
+		/obj/item/stack/sheet/rglass,
+		/obj/item/stack/sheet/plasmarglass,
+		/obj/item/stack/sheet/titaniumglass,
+		/obj/item/stack/sheet/plastitaniumglass,
+		/obj/item/stack/sheet/mineral,
+		/obj/item/stack/sheet/metal,
+		/obj/item/stack/sheet/plasteel,
+		/obj/item/stack/sheet/plastic,
+		/obj/item/stack/sheet/bluespace_crystal
 		))
 
 /obj/item/storage/bag/construction/holding
