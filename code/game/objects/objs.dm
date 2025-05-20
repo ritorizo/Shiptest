@@ -36,7 +36,7 @@
 	/// Custom fire overlay icon
 	var/custom_fire_overlay
 
-	var/list/new_access = list(null, 0)
+	var/list/new_access = ACCESS_PAIR_DEFAULT
 
 	var/renamedByPlayer = FALSE //set when a player uses a pen on a renamable object
 

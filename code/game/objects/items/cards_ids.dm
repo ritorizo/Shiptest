@@ -518,6 +518,7 @@ update_label()
 	icon_state = "ert_janitor"
 	assignment = "Jannie"
 	uses_overlays = FALSE
+	new_access = list(NAMESPACE_ROOT, ACCESS_SHIP_ALL)
 
 /obj/item/card/id/debug/Initialize()
 	access = get_all_accesses()+get_all_centcom_access()+get_all_syndicate_access()
