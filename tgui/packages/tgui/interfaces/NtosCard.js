@@ -26,8 +26,8 @@ export const NtosCardContent = (props, context) => {
   const [tab, setTab] = useLocalState(context, 'tab', 1);
   const {
     authenticated,
-    regions = [],
-    access_on_card = [],
+    accesses = [],
+    current_access,
     jobs = {},
     id_rank,
     id_owner,
@@ -39,11 +39,6 @@ export const NtosCardContent = (props, context) => {
     id_has_ship_access,
     ship_has_unique_access,
   } = data;
-  const [selectedDepartment, setSelectedDepartment] = useLocalState(
-    context,
-    'department',
-    Object.keys(jobs)[0]
-  );
   if (!have_id_slot) {
     return (
       <NoticeBox>
@@ -51,7 +46,6 @@ export const NtosCardContent = (props, context) => {
       </NoticeBox>
     );
   }
-  const departmentJobs = jobs[selectedDepartment] || [];
   return (
     <>
       <Section
@@ -132,23 +126,11 @@ export const NtosCardContent = (props, context) => {
                 />
               )}
               <AccessList
-                accesses={regions}
-                selectedList={access_on_card}
+                accesses={accesses}
+                selected_accesses={current_access}
                 accessMod={(ref) =>
                   act('PRG_access', {
                     access_target: ref,
-                  })
-                }
-                grantAll={() => act('PRG_grantall')}
-                denyAll={() => act('PRG_denyall')}
-                grantDep={(dep) =>
-                  act('PRG_grantregion', {
-                    region: dep,
-                  })
-                }
-                denyDep={(dep) =>
-                  act('PRG_denyregion', {
-                    region: dep,
                   })
                 }
               />
@@ -177,30 +159,15 @@ export const NtosCardContent = (props, context) => {
                 }
               />
               <Flex>
-                {Object.keys(jobs).length > 1 && (
-                  <Flex.Item>
-                    <Tabs vertical>
-                      {Object.keys(jobs).map((department) => (
-                        <Tabs.Tab
-                          key={department}
-                          selected={department === selectedDepartment}
-                          onClick={() => setSelectedDepartment(department)}
-                        >
-                          {department}
-                        </Tabs.Tab>
-                      ))}
-                    </Tabs>
-                  </Flex.Item>
-                )}
                 <Flex.Item grow={1}>
-                  {departmentJobs.map((job) => (
+                  {jobs.map((job) => (
                     <Button
                       fluid
-                      key={job.job}
-                      content={job.display_name}
+                      key={job}
+                      content={job}
                       onClick={() =>
                         act('PRG_assign', {
-                          assign_target: job.job,
+                          assign_target: job,
                         })
                       }
                     />

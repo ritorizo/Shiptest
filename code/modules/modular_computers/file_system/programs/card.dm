@@ -1,11 +1,3 @@
-#define CARDCON_DEPARTMENT_SERVICE "Service"
-#define CARDCON_DEPARTMENT_SECURITY "Security"
-#define CARDCON_DEPARTMENT_MEDICAL "Medical"
-#define CARDCON_DEPARTMENT_SUPPLY "Supply"
-#define CARDCON_DEPARTMENT_SCIENCE "Science"
-#define CARDCON_DEPARTMENT_ENGINEERING "Engineering"
-#define CARDCON_DEPARTMENT_COMMAND "Command"
-
 /datum/computer_file/program/card_mod
 	filename = "plexagonidwriter"
 	filedesc = "Plexagon Access Management"
@@ -17,18 +9,11 @@
 	tgui_id = "NtosCard"
 	program_icon = "id-card"
 
-	var/is_centcom = FALSE
-	var/minor = FALSE
-	var/authenticated = FALSE
-	var/list/region_access
-	///Which departments this computer has access to. Defined as access regions. null = all departments
-	var/target_dept
+	/// The access pair of the currently logged in officer.
+	var/authenticated = null
 
 	// Can only get defined on stationary console altough you can carry it away if you yoink the hard drive or copy the file
 	var/datum/overmap/ship/controlled/ship
-
-	//For some reason everything was exploding if this was static.
-	var/list/sub_managers
 
 	COOLDOWN_DECLARE(silicon_access_print_cooldown)
 
@@ -47,58 +32,13 @@
 
 /datum/computer_file/program/card_mod/New(obj/item/modular_computer/comp)
 	. = ..()
-	sub_managers = list(
-		"[ACCESS_HOP]" = list(
-			"department" = list(CARDCON_DEPARTMENT_SERVICE, CARDCON_DEPARTMENT_COMMAND),
-			"region" = 1,
-			"head" = "Head of Personnel"
-		),
-		"[ACCESS_HOS]" = list(
-			"department" = CARDCON_DEPARTMENT_SECURITY,
-			"region" = 2,
-			"head" = "Head of Security"
-		),
-		"[ACCESS_CMO]" = list(
-			"department" = CARDCON_DEPARTMENT_MEDICAL,
-			"region" = 3,
-			"head" = "Chief Medical Officer"
-		),
-		"[ACCESS_RD]" = list(
-			"department" = CARDCON_DEPARTMENT_SCIENCE,
-			"region" = 4,
-			"head" = "Research Director"
-		),
-		"[ACCESS_CE]" = list(
-			"department" = CARDCON_DEPARTMENT_ENGINEERING,
-			"region" = 5,
-			"head" = "Chief Engineer"
-		)
-	)
 
 /datum/computer_file/program/card_mod/proc/authenticate(mob/user, obj/item/card/id/id_card)
 	if(!id_card)
 		return
 
-	if (ship?.unique_ship_access && !(id_card?.has_ship_access(ship)))
-		return FALSE
-
-	region_access = list()
-	if(!target_dept && (ACCESS_CHANGE_IDS in id_card.access))
-		minor = FALSE
-		authenticated = TRUE
-		update_static_data(user)
-		return TRUE
-
-	for(var/access_text in sub_managers)
-		var/list/info = sub_managers[access_text]
-		var/access = text2num(access_text)
-		if((access in id_card.access) && ((info["region"] in target_dept) || !length(target_dept)))
-			region_access += info["region"]
-
-	if(length(region_access))
-		minor = TRUE
-		authenticated = TRUE
-		update_static_data(user)
+	if(access_match(id_card.new_access, list(NAMESPACE_PUBLIC, ACCESS_SHIP_COMMAND)))
+		authenticated = id_card.new_access.Copy()
 		return TRUE
 
 	return FALSE
@@ -130,7 +70,7 @@
 				playsound(computer, 'sound/machines/terminal_on.ogg', 50, FALSE)
 				return TRUE
 		if("PRG_logout")
-			authenticated = FALSE
+			authenticated = null
 			playsound(computer, 'sound/machines/terminal_off.ogg', 50, FALSE)
 			return TRUE
 		if("PRG_print")
@@ -146,10 +86,8 @@
 						<u>Access:</u><br>
 						"}
 
-			var/known_access_rights = get_all_accesses()
-			for(var/A in id_card.access)
-				if(A in known_access_rights)
-					contents += "  [get_access_desc(A)]"
+			for(var/A in SSaccess.flags_to_names(id_card.get_access_flags()))
+				contents += "  [A]"
 
 			if(!printer.print_text(contents,"access report"))
 				to_chat(usr, span_notice("Hardware error: Printer was unable to print the file. It may be out of paper."))
@@ -174,12 +112,10 @@
 		if("PRG_terminate")
 			if(!computer || !authenticated)
 				return
-			if(minor)
-				return
 
-			id_card.access -= get_all_centcom_access() + get_all_accesses()
+			id_card.set_access_flags(0)
+			id_card.set_access_namespace(NAMESPACE_PUBLIC)
 			id_card.assignment = "Unassigned"
-			id_card.update_label()
 			SEND_SIGNAL(id_card, COSMIG_ACCESS_UPDATED)
 			playsound(computer, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 			return TRUE
@@ -202,62 +138,53 @@
 			if(!target)
 				return
 
+			var/datum/job/new_job = null
 			if(target == "Custom")
 				var/custom_name = reject_bad_name(params["custom_name"]) // if reject bad name fails, the edit will just not go through, as custom_name would be empty
 				if(custom_name)
 					id_card.assignment = custom_name
 					id_card.update_label()
 			else
-				if(minor)
-					return
-				var/list/new_access = list()
-				if(is_centcom)
-					new_access = get_centcom_access(target)
-				else if(ship)
+				if(ship)
 					for (var/datum/job/J in ship.job_slots)
 						if(J.name == target)
-							new_access = J.get_access()
+							new_job = J
 							break
 				else
-					var/datum/job/job
 					for(var/jobtype in subtypesof(/datum/job))
 						var/datum/job/J = new jobtype
 						if(J.name == target)
-							job = J
+							new_job = J
 							break
-					if(!job)
+					if(!new_job)
 						to_chat(user, span_warning("No class exists for this job: [target]"))
 						return
-					new_access = job.get_access()
-				id_card.access -= get_all_centcom_access() + get_all_accesses()
-				id_card.access |= new_access
-				id_card.assignment = target
-				id_card.update_label()
-				SEND_SIGNAL(id_card, COSMIG_ACCESS_UPDATED)
+
+			id_card.set_access_flags(new_job.access_flags)
+			id_card.set_access_namespace(authenticated[1])
+			id_card.assignment = target
+			id_card.update_label()
+			SEND_SIGNAL(id_card, COSMIG_ACCESS_UPDATED)
 			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
 			return TRUE
 		if("PRG_access")
 			if(!computer || !authenticated)
 				return
-			var/access_type = text2num(params["access_target"])
-			if(access_type in (is_centcom ? get_all_centcom_access() : get_all_accesses()))
-				if(access_type in id_card.access)
-					id_card.access -= access_type
-				else
-					id_card.access |= access_type
-				SEND_SIGNAL(id_card, COSMIG_ACCESS_UPDATED)
-				playsound(computer, "terminal_type", 50, FALSE)
-				return TRUE
+			var/access_flag = text2num(params["access_target"])
+			id_card.set_access_flags(id_card.get_access_flags() ^ access_flag)
+			return TRUE
 		if ( "PRG_grantship" )
-			if(!computer || !authenticated || !ship)
+			if(!computer || !authenticated)
 				return
-			id_card.add_ship_access(ship)
+			id_card.set_access_namespace(authenticated[1])
 			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
 			return TRUE
 		if ( "PRG_denyship" )
-			if(!computer || !authenticated || !ship)
+			if(!computer || !authenticated)
 				return
-			id_card.remove_ship_access(ship)
+			if (id_card.get_access_namespace() != authenticated[1])
+				return
+			id_card.set_access_namespace(NAMESPACE_PUBLIC)
 			playsound(computer, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 			return TRUE
 		if ( "PRG_enableuniqueaccess" )
@@ -273,7 +200,7 @@
 			playsound(computer, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 			return TRUE
 		if ( "PRG_printsiliconaccess" )
-			if(!computer || !authenticated || !ship)
+			if(!computer || !authenticated)
 				return
 			if(!COOLDOWN_FINISHED(src, silicon_access_print_cooldown))
 				computer.say("Printer unavailable. Please allow a short time before attempting to print.")
@@ -285,100 +212,39 @@
 			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
 			return TRUE
 		if("PRG_grantall")
-			if(!computer || !authenticated || minor)
+			if(!computer || !authenticated)
 				return
-			id_card.access |= (is_centcom ? get_all_centcom_access() : get_all_accesses())
+			id_card.set_access_flags(ACCESS_SHIP_ALL)
+			id_card.set_access_namespace(authenticated[1])
 			SEND_SIGNAL(src, COSMIG_ACCESS_UPDATED)
 			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
 			return TRUE
 		if("PRG_denyall")
-			if(!computer || !authenticated || minor)
+			if(!computer || !authenticated)
 				return
-			id_card.access.Cut()
+			id_card.set_access_flags(0)
 			SEND_SIGNAL(src, COSMIG_ACCESS_UPDATED)
 			playsound(computer, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
 			return TRUE
-		if("PRG_grantregion")
-			if(!computer || !authenticated)
-				return
-			var/region = text2num(params["region"])
-			if(isnull(region))
-				return
-			id_card.access |= get_region_accesses(region)
-			SEND_SIGNAL(src, COSMIG_ACCESS_UPDATED)
-			playsound(computer, 'sound/machines/terminal_prompt_confirm.ogg', 50, FALSE)
-			return TRUE
-		if("PRG_denyregion")
-			if(!computer || !authenticated)
-				return
-			var/region = text2num(params["region"])
-			if(isnull(region))
-				return
-			id_card.access -= get_region_accesses(region)
-			SEND_SIGNAL(src, COSMIG_ACCESS_UPDATED)
-			playsound(computer, 'sound/machines/terminal_prompt_deny.ogg', 50, FALSE)
-			return TRUE
-
 
 
 /datum/computer_file/program/card_mod/ui_static_data(mob/user)
 	var/list/data = list()
 	data["station_name"] = station_name()
-	data["centcom_access"] = is_centcom
-	data["minor"] = target_dept || minor ? TRUE : FALSE
 
-	var/list/departments = target_dept
-	if(is_centcom)
-		departments = list("CentCom" = get_all_centcom_jobs())
-	else if(ship)
-		var/jobs = list()
+	var/jobs = list()
+	if(ship)
 		for (var/datum/job/job in ship.job_slots)
 			jobs += job.name
-		departments = list("Jobs" = jobs)
-	else if(isnull(departments))
-		departments = list(
-			CARDCON_DEPARTMENT_COMMAND = list("Captain"),//lol
-			CARDCON_DEPARTMENT_ENGINEERING = GLOB.engineering_positions,
-			CARDCON_DEPARTMENT_MEDICAL = GLOB.medical_positions,
-			CARDCON_DEPARTMENT_SCIENCE = GLOB.science_positions,
-			CARDCON_DEPARTMENT_SECURITY = GLOB.security_positions,
-			CARDCON_DEPARTMENT_SUPPLY = GLOB.supply_positions,
-			CARDCON_DEPARTMENT_SERVICE = GLOB.service_positions
-		)
-	data["jobs"] = list()
-	for(var/department in departments)
-		var/list/job_list = departments[department]
-		var/list/department_jobs = list()
-		for(var/job in job_list)
-			if(minor)
-				break
-			department_jobs += list(list(
-				"display_name" = replacetext(job, "&nbsp", " "),
-				"job" = job
-			))
-		if(length(department_jobs))
-			data["jobs"][department] = department_jobs
+	data["jobs"] = jobs
 
-	var/list/regions = list()
-	for(var/i in 1 to 7)
-		if((minor || target_dept) && !(i in region_access))
-			continue
-
-		var/list/accesses = list()
-		for(var/access in get_region_accesses(i))
-			if (get_access_desc(access))
-				accesses += list(list(
-					"desc" = replacetext(get_access_desc(access), "&nbsp", " "),
-					"ref" = access,
-				))
-
-		regions += list(list(
-			"name" = get_region_accesses_name(i),
-			"regid" = i,
-			"accesses" = accesses
+	var/list/accesses = list()
+	for(var/access in SSaccess.flags_names)
+		accesses += list(list(
+			"desc" = replacetext(access, "&nbsp", " "),
+			"ref" = SSaccess.flags_names[access],
 		))
-
-	data["regions"] = regions
+	data["accesses"] = accesses
 
 	return data
 
@@ -401,7 +267,7 @@
 		data["have_id_slot"] = FALSE
 		data["have_printer"] = FALSE
 
-	data["authenticated"] = authenticated
+	data["authenticated"] = !!authenticated
 
 	if(computer && card_slot)
 		var/obj/item/card/id/id_card = card_slot.stored_card
@@ -410,7 +276,7 @@
 		if(id_card)
 			data["id_rank"] = id_card.assignment ? id_card.assignment : "Unassigned"
 			data["id_owner"] = id_card.registered_name ? id_card.registered_name : "-----"
-			data["access_on_card"] = id_card.access
+			data["current_access"] = id_card.get_access_flags()
 
 		if (id_card)
 			data[ "id_has_ship_access" ] = id_card.has_ship_access(ship)
@@ -419,13 +285,3 @@
 			data[ "ship_has_unique_access" ] = ship.unique_ship_access
 
 	return data
-
-
-
-#undef CARDCON_DEPARTMENT_SERVICE
-#undef CARDCON_DEPARTMENT_SECURITY
-#undef CARDCON_DEPARTMENT_MEDICAL
-#undef CARDCON_DEPARTMENT_SCIENCE
-#undef CARDCON_DEPARTMENT_SUPPLY
-#undef CARDCON_DEPARTMENT_ENGINEERING
-#undef CARDCON_DEPARTMENT_COMMAND
