@@ -11,8 +11,9 @@
 #define ACCESS_SHIP_NONE 0
 
 /// Hardcoded namespaces for special behavior
-#define NAMESPACE_ROOT 0
-#define NAMESPACE_PUBLIC 1
+#define NAMESPACE_ROOT 1
+#define NAMESPACE_PUBLIC 2
+
 
 /// Predefined access pair
 #define ACCESS_PAIR_DEFAULT list(NAMESPACE_PUBLIC, ACCESS_SHIP_NONE)
