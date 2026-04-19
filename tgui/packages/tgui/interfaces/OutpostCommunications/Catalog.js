@@ -7,6 +7,7 @@ import {
   Flex,
   Icon,
   Input,
+  NumberInput,
   Section,
   Stack,
   Table,
@@ -34,13 +35,38 @@ export const CargoCatalog = (props, context) => {
     ''
   );
 
-  const [cart, setCart] = useSharedState(context, 'cart', []);
+  const [cart, setCart] = useSharedState(context, 'cart', {});
 
-  const cartTotal = cart.reduce(
-    (cartTotal, entry) =>
-      cartTotal + (entry.discountedcost ? entry.discountedcost : entry.cost),
+  const addPack = (pack, count=1) => {
+    setPack(
+      pack,
+      (cart[pack] ? cart[pack] : 0) + count,
+    );
+  };
+
+  const setPack = (pack, count) => {
+    let tmpcart = {...cart};
+    if (count > 0) {
+      tmpcart[pack] = count;
+    } else {
+      delete tmpcart[pack];
+    }
+    setCart(tmpcart);
+  };
+
+  const itemCount = Object.values(cart).reduce(
+    (itemCount, current_count) => itemCount + current_count,
     0
   );
+
+  const cartTotal = (() => {
+    let total = 0;
+    for (const item in cart) {
+      total += (item.discountedcost ? item.discountedcost : item.cost)*cart[item];
+    }
+    return total;
+  })();
+
 
   const activeSupply =
     activeSupplyName === 'search_results'
@@ -49,20 +75,20 @@ export const CargoCatalog = (props, context) => {
 
   return (
     <>
-      <Section title="Cart">
-        <>
-          <Box inline my={1} mx={1}>
-            {cart.length === 0 && 'Cart is empty'}
-            {cart.length === 1 && '1 item'}
-            {cart.length >= 2 && cart.length + ' items'}{' '}
-            {cartTotal > 0 && `(${formatMoney(cartTotal)} cr)`}
-          </Box>
+      <Section title="Cart"
+        buttons={
           <>
+            <Box inline my={1} mx={1}>
+              {itemCount === 0 && 'Cart is empty'}
+              {itemCount === 1 && '1 item'}
+              {itemCount >= 2 && itemCount + ' items'}{' '}
+              {cartTotal > 0 && `(${formatMoney(cartTotal)} cr)`}
+            </Box>
             <Button
-              icon="times"
+              icon="trash"
               color="transparent"
               content="Clear"
-              onClick={() => setCart([])}
+              onClick={() => setCart({})}
             />
             {blockade ? (
               <Button
@@ -73,38 +99,60 @@ export const CargoCatalog = (props, context) => {
             ) : (
               <Button
                 color="green"
+                icon="shopping-cart"
                 content="Purchase"
                 onClick={() => {
                   act('purchase', {
                     cart: cart,
                     total: cartTotal,
                   });
-                  setCart([]);
+                  setCart({});
                 }}
               />
             )}
           </>
+        }>
+        <>
         </>
-        {cart.length !== 0 ? (
+        {itemCount !== 0 ? (
           <Collapsible title="Cart Contents">
             <Table>
-              {cart.map((pack) => {
+              {Object.entries(cart).map(([pack, count]) => {
                 return (
-                  <Table.Row key={pack} className="candystripe">
-                    <Table.Cell>
-                      {(pack.discountedcost ? pack.discountedcost : pack.cost) +
-                        ' cr'}
-                    </Table.Cell>
-                    <Table.Cell collapsing color="label" textAlign="right">
-                      {pack.name}
-                    </Table.Cell>
-                  </Table.Row>
-                );
-              })}
+                <Table.Row key={pack} className="candystripe">
+                  <Table.Cell>
+                    <Button
+                      icon="times"
+                      onClick = {() => setPack(pack, 0)}
+                    />
+                    <NumberInput
+                      width="40px"
+                      value={count}
+                      minValue={0}
+                      maxValue={100}
+                    />
+                    {(pack.discountedcost ? pack.discountedcost : pack.cost) +
+                      ' cr'}
+                  </Table.Cell>
+                  <Table.Cell collapsing color="label" textAlign="right">
+                    {pack.name}
+                  </Table.Cell>
+                </Table.Row>
+                )
+                })
+              }
             </Table>
           </Collapsible>
         ) : (
-          ''
+          <Box mb={1}>
+            <Button
+              icon="times"
+              fluid
+              ellipsis
+              disabled = {true}
+              content="Cart is empty"
+              />
+          </Box>
         )}
       </Section>
       <Section title="Catalog">
@@ -189,7 +237,7 @@ export const CargoCatalog = (props, context) => {
                             : 'default'
                         }
                         tooltipPosition="left"
-                        onClick={() => setCart(cart.concat(pack))}
+                        onClick={() => addPack(pack)}
                       >
                         {pack.discountedcost
                           ? ' (-' +
