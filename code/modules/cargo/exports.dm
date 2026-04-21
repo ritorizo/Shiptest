@@ -97,7 +97,9 @@
 		// so that selling even half a unit twice is no more effective than selling the whole unit, ignoring rounding.
 
 		// We get the point at which the elasticity function reachs the sell floor
-		var/eq_point = log(sell_floor/cost)/log(1-elasticity_coeff)
+		var/eq_point = INFINITY
+		if (sell_floor > 0)
+			eq_point = log(sell_floor/cost)/log(1-elasticity_coeff)
 		return max(sell_floor*amount, round(
 			(true_cost/log(1 - elasticity_coeff)) * ((1 - elasticity_coeff)**min(amount, eq_point) - 1) + sell_floor*max(0, amount-eq_point),
 			1
