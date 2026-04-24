@@ -21,12 +21,13 @@ export const CargoCatalog = (props, context) => {
 
   const { self_paid, app_cost, blockade } = data;
 
-  const supplies = Object.values(data.supplies);
+  const categories = Object.values(data.categories);
+  const all_packs = data.all_packs
 
-  const [activeSupplyName, setActiveSupplyName] = useSharedState(
+  const [activeCategoryName, setActiveCategoryName] = useSharedState(
     context,
-    'supply',
-    supplies[0]?.name
+    'category',
+    categories[0]?.name
   );
 
   const [searchText, setSearchText] = useSharedState(
@@ -35,21 +36,25 @@ export const CargoCatalog = (props, context) => {
     ''
   );
 
-  const [cart, setCart] = useSharedState(context, 'cart', {});
+  const [cart, setCart] = useSharedState(
+    context,
+    'cart',
+    {}
+  );
 
-  const addPack = (pack, count=1) => {
+  const addPack = (pack_ref, count=1) => {
     setPack(
-      pack,
-      (cart[pack] ? cart[pack] : 0) + count,
+      pack_ref,
+      (cart[pack_ref] ? cart[pack_ref] : 0) + count,
     );
   };
 
-  const setPack = (pack, count) => {
+  const setPack = (pack_ref, count) => {
     let tmpcart = {...cart};
     if (count > 0) {
-      tmpcart[pack] = count;
+      tmpcart[pack_ref] = count;
     } else {
-      delete tmpcart[pack];
+      delete tmpcart[pack_ref];
     }
     setCart(tmpcart);
   };
@@ -61,17 +66,19 @@ export const CargoCatalog = (props, context) => {
 
   const cartTotal = (() => {
     let total = 0;
-    for (const item in cart) {
-      total += (item.discountedcost ? item.discountedcost : item.cost)*cart[item];
+    let item;
+    for (const item_ref in cart) {
+      item = all_packs[item_ref];
+      total += (item.discountedcost ? item.discountedcost : item.cost)*cart[item_ref];
     }
     return total;
   })();
 
 
-  const activeSupply =
-    activeSupplyName === 'search_results'
-      ? { packs: searchForSupplies(supplies, searchText) }
-      : supplies.find((supply) => supply.name === activeSupplyName);
+  const activeCategory =
+    activeCategoryName === 'search_results'
+      ? { packs: searchForPacks(all_packs, searchText) }
+      : categories.find((category) => category.name === activeCategoryName);
 
   return (
     <>
@@ -100,6 +107,7 @@ export const CargoCatalog = (props, context) => {
               <Button
                 color="green"
                 icon="shopping-cart"
+                disabled={!itemCount}
                 content="Purchase"
                 onClick={() => {
                   act('purchase', {
@@ -117,21 +125,20 @@ export const CargoCatalog = (props, context) => {
         {itemCount !== 0 ? (
           <Collapsible title="Cart Contents">
             <Table>
-              {Object.entries(cart).map(([pack, count]) => {
+              {Object.entries(cart).map(([pack_ref, count]) => [all_packs[pack_ref],count]).map(([pack, count]) => {
                 return (
                 <Table.Row key={pack} className="candystripe">
                   <Table.Cell>
                     <Button
                       icon="times"
-                      onClick = {() => setPack(pack, 0)}
+                      onClick = {() => setPack(pack.ref, 0)}
                     />
                     <NumberInput
                       width="40px"
                       value={count}
-                      minValue={0}
-                      maxValue={100}
+                      onChange={(e, value) => setPack(pack.ref, value)}
                     />
-                    {(pack.discountedcost ? pack.discountedcost : pack.cost) +
+                    {(pack.discountedcost ? pack.discountedcost : pack.cost)*count +
                       ' cr'}
                   </Table.Cell>
                   <Table.Cell collapsing color="label" textAlign="right">
@@ -161,7 +168,7 @@ export const CargoCatalog = (props, context) => {
             <Tabs vertical>
               <Tabs.Tab
                 key="search_results"
-                selected={activeSupplyName === 'search_results'}
+                selected={activeCategoryName === 'search_results'}
               >
                 <Stack align="baseline">
                   <Stack.Item>
@@ -179,10 +186,10 @@ export const CargoCatalog = (props, context) => {
 
                         if (value.length) {
                           // Start showing results
-                          setActiveSupplyName('search_results');
-                        } else if (activeSupplyName === 'search_results') {
+                          setActiveCategoryName('search_results');
+                        } else if (activeCategoryName === 'search_results') {
                           // return to normal category
-                          setActiveSupplyName(supplies[0]?.name);
+                          setActiveCategoryName(categories[0]?.name);
                         }
                         setSearchText(value);
                       }}
@@ -197,23 +204,23 @@ export const CargoCatalog = (props, context) => {
                   </Stack.Item>
                 </Stack>
               </Tabs.Tab>
-              {supplies.map((supply) => (
+              {categories.map((category) => (
                 <Tabs.Tab
-                  key={supply.name}
-                  selected={supply.name === activeSupplyName}
+                  key={category.name}
+                  selected={category.name === activeCategoryName}
                   onClick={() => {
-                    setActiveSupplyName(supply.name);
+                    setActiveCategoryName(category.name);
                     setSearchText('');
                   }}
                 >
-                  {supply.name} ({supply.packs.length})
+                  {category.name} ({category.packs.length})
                 </Tabs.Tab>
               ))}
             </Tabs>
           </Flex.Item>
           <Flex.Item grow={1} basis={0}>
             <Table>
-              {activeSupply?.packs.map((pack) => {
+              {activeCategory?.packs.map((pack_ref) => all_packs[pack_ref]).map((pack) => {
                 const tags = [];
                 // if (pack.no_bundle) {
                 //   tags.push('No Grouping');
@@ -237,7 +244,7 @@ export const CargoCatalog = (props, context) => {
                             : 'default'
                         }
                         tooltipPosition="left"
-                        onClick={() => addPack(pack)}
+                        onClick={() => addPack(pack.ref)}
                       >
                         {pack.discountedcost
                           ? ' (-' +
@@ -271,11 +278,10 @@ export const CargoCatalog = (props, context) => {
  * @param {string} search The search term
  * @returns {any[]} The flat list of supply packs.
  */
-const searchForSupplies = (supplies, search) => {
+const searchForPacks = (all_packs, search) => {
   search = search.toLowerCase();
 
   return flow([
-    (categories) => categories.flatMap((category) => category.packs),
     filter(
       (pack) =>
         pack.name?.toLowerCase().includes(search.toLowerCase()) ||
@@ -283,5 +289,5 @@ const searchForSupplies = (supplies, search) => {
     ),
     sortBy((pack) => pack.name),
     (packs) => packs.slice(0, 25),
-  ])(supplies);
+  ])(Object.values(all_packs)).map((pack) => pack.ref);
 };
