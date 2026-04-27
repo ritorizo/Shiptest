@@ -7,7 +7,6 @@ import {
   Flex,
   Icon,
   Input,
-  NumberInput,
   Section,
   Stack,
   Table,
@@ -23,7 +22,7 @@ export const CargoCatalog = (props, context) => {
   const { self_paid, app_cost, blockade } = data;
 
   const categories = Object.values(data.categories);
-  const all_packs = data.all_packs
+  const all_packs = data.all_packs;
 
   const [activeCategoryName, setActiveCategoryName] = useSharedState(
     context,
@@ -37,21 +36,14 @@ export const CargoCatalog = (props, context) => {
     ''
   );
 
-  const [cart, setCart] = useSharedState(
-    context,
-    'cart',
-    {}
-  );
+  const [cart, setCart] = useSharedState(context, 'cart', {});
 
-  const addPack = (pack_ref, count=1) => {
-    setPack(
-      pack_ref,
-      (cart[pack_ref] ? cart[pack_ref] : 0) + count,
-    );
+  const addPack = (pack_ref, count = 1) => {
+    setPack(pack_ref, (cart[pack_ref] ? cart[pack_ref] : 0) + count);
   };
 
   const setPack = (pack_ref, count) => {
-    let tmpcart = {...cart};
+    let tmpcart = { ...cart };
     if (count > 0) {
       tmpcart[pack_ref] = count;
     } else {
@@ -70,11 +62,12 @@ export const CargoCatalog = (props, context) => {
     let item;
     for (const item_ref in cart) {
       item = all_packs[item_ref];
-      total += (item.discountedcost ? item.discountedcost : item.cost)*cart[item_ref];
+      total +=
+        (item.discountedcost ? item.discountedcost : item.cost) *
+        cart[item_ref];
     }
     return total;
   })();
-
 
   const activeCategory =
     activeCategoryName === 'search_results'
@@ -83,7 +76,8 @@ export const CargoCatalog = (props, context) => {
 
   return (
     <>
-      <Section title="Cart"
+      <Section
+        title="Cart"
         buttons={
           <>
             <Box inline my={1} mx={1}>
@@ -120,45 +114,57 @@ export const CargoCatalog = (props, context) => {
               />
             )}
           </>
-        }>
-        <>
-        </>
+        }
+      >
         {itemCount !== 0 ? (
           <Collapsible title="Cart Contents">
             <Table>
               {Object.entries(cart).map(([pack_ref, count]) => {
                 const pack = all_packs[pack_ref];
-                const actualcost = pack.discountedcost ? pack.discountedcost : pack.cost;
+                const actualcost = pack.discountedcost
+                  ? pack.discountedcost
+                  : pack.cost;
                 return (
-                <Table.Row key={pack_ref} className="candystripe">
-                  <Table.Cell>
-                    <Button
-                      icon="times"
-                      color="transparent"
-                      onClick = {() => setPack(pack_ref, 0)}
-                    />
-                    <Input
-                      width="40px"
-                      value={count}
-                      textAlign="right"
-                      onChange={ (e, value) => {
-                        if (!isNaN(value) && value !== '') {
-                          setPack(pack_ref, Number(value));
-                        }
-                      }}
-                    />
-                  </Table.Cell>
-                  <Table.Cell textAlign="right">
-                    <Tooltip content={formatMoney(actualcost) + " cr per unit."} position="right"><Box>{formatMoney(actualcost*count) + ' cr'}</Box></Tooltip>
-                  </Table.Cell>
-                  <Table.Cell width="3%" />
-                  <Table.Cell collapsing color="label" textAlign="left" width="70%">
-                    <Tooltip content={pack.desc} position="bottom"><Box> {pack.name}  </Box></Tooltip>
-                  </Table.Cell>
-                </Table.Row>
-                )
-                })
-              }
+                  <Table.Row key={pack_ref} className="candystripe">
+                    <Table.Cell>
+                      <Button
+                        icon="times"
+                        color="transparent"
+                        onClick={() => setPack(pack_ref, 0)}
+                      />
+                      <Input
+                        width="40px"
+                        value={count}
+                        textAlign="right"
+                        onChange={(e, value) => {
+                          if (!isNaN(value) && value !== '') {
+                            setPack(pack_ref, Number(value));
+                          }
+                        }}
+                      />
+                    </Table.Cell>
+                    <Table.Cell textAlign="right">
+                      <Tooltip
+                        content={formatMoney(actualcost) + ' cr per unit.'}
+                        position="right"
+                      >
+                        <Box>{formatMoney(actualcost * count) + ' cr'}</Box>
+                      </Tooltip>
+                    </Table.Cell>
+                    <Table.Cell width="3%" />
+                    <Table.Cell
+                      collapsing
+                      color="label"
+                      textAlign="left"
+                      width="70%"
+                    >
+                      <Tooltip content={pack.desc} position="bottom">
+                        <Box> {pack.name} </Box>
+                      </Tooltip>
+                    </Table.Cell>
+                  </Table.Row>
+                );
+              })}
             </Table>
           </Collapsible>
         ) : (
@@ -167,9 +173,9 @@ export const CargoCatalog = (props, context) => {
               icon="times"
               fluid
               ellipsis
-              disabled = {true}
+              disabled={1}
               content="Cart is empty"
-              />
+            />
           </Box>
         )}
       </Section>
@@ -231,48 +237,52 @@ export const CargoCatalog = (props, context) => {
           </Flex.Item>
           <Flex.Item grow={1} basis={0}>
             <Table>
-              {activeCategory?.packs.map((pack_ref) => all_packs[pack_ref]).map((pack) => {
-                const tags = [];
-                // if (pack.no_bundle) {
-                //   tags.push('No Grouping');
-                // }
-                if (pack.access) {
-                  tags.push('Restricted');
-                }
-                return (
-                  <Table.Row key={pack.name} className="candystripe">
-                    <Table.Cell>{pack.name}</Table.Cell>
-                    <Table.Cell collapsing color="label" textAlign="right">
-                      {tags.join(', ')}
-                    </Table.Cell>
-                    <Table.Cell collapsing textAlign="right">
-                      <Button
-                        fluid
-                        tooltip={pack.desc}
-                        color={
-                          pack.discountedcost || pack.faction_locked
-                            ? 'green'
-                            : 'default'
-                        }
-                        tooltipPosition="left"
-                        onClick={() => addPack(pack.ref)}
-                      >
-                        {pack.discountedcost
-                          ? ' (' +
-                            (pack.discountpercent > 0 ? "-" + pack.discountpercent : "+" + (-pack.discountpercent)) +
-                            '%) ' +
-                            formatMoney(pack.discountedcost)
-                          : formatMoney(
-                              (self_paid && !pack.goody) || app_cost
-                                ? Math.round(pack.cost * 1.1)
-                                : pack.cost
-                            )}
-                        {' cr'}
-                      </Button>
-                    </Table.Cell>
-                  </Table.Row>
-                );
-              })}
+              {activeCategory?.packs
+                .map((pack_ref) => all_packs[pack_ref])
+                .map((pack) => {
+                  const tags = [];
+                  // if (pack.no_bundle) {
+                  //   tags.push('No Grouping');
+                  // }
+                  if (pack.access) {
+                    tags.push('Restricted');
+                  }
+                  return (
+                    <Table.Row key={pack.name} className="candystripe">
+                      <Table.Cell>{pack.name}</Table.Cell>
+                      <Table.Cell collapsing color="label" textAlign="right">
+                        {tags.join(', ')}
+                      </Table.Cell>
+                      <Table.Cell collapsing textAlign="right">
+                        <Button
+                          fluid
+                          tooltip={pack.desc}
+                          color={
+                            pack.discountedcost || pack.faction_locked
+                              ? 'green'
+                              : 'default'
+                          }
+                          tooltipPosition="left"
+                          onClick={() => addPack(pack.ref)}
+                        >
+                          {pack.discountedcost
+                            ? ' (' +
+                              (pack.discountpercent > 0
+                                ? '-' + pack.discountpercent
+                                : '+' + -pack.discountpercent) +
+                              '%) ' +
+                              formatMoney(pack.discountedcost)
+                            : formatMoney(
+                                (self_paid && !pack.goody) || app_cost
+                                  ? Math.round(pack.cost * 1.1)
+                                  : pack.cost
+                              )}
+                          {' cr'}
+                        </Button>
+                      </Table.Cell>
+                    </Table.Row>
+                  );
+                })}
             </Table>
           </Flex.Item>
         </Flex>
