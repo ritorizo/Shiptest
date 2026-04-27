@@ -67,6 +67,7 @@
 		current_faction = current_ship.source_template.faction
 		charge_account = current_ship.ship_account
 		outpost_docked = current_ship.docked_to
+		update_static_data_for_all_viewers()
 
 /obj/machinery/computer/cargo/ui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -77,8 +78,12 @@
 			reconnect()
 
 /obj/machinery/computer/cargo/ui_static_data(mob/user)
-	. = ..()
 	generate_pack_data()
+
+	var/list/static_data = list()
+	static_data["categories"] = categories_data
+	static_data["all_packs"] = all_packs_data
+	return static_data
 
 /obj/machinery/computer/cargo/ui_data(mob/user)
 	var/list/data = list()
@@ -96,8 +101,6 @@
 		message = blockade_warning
 		data["blockade"] = TRUE
 	data["message"] = message
-	data["categories"] = categories_data
-	data["all_packs"] = all_packs_data
 
 	data["shipMissions"] = list()
 	data["outpostMissions"] = list()
@@ -150,9 +153,12 @@
 
 			var/list/unprocessed_packs = list()
 			for(var/list/pack_ref as anything in purchasing)
-				unprocessed_packs[locate(pack_ref) in current_outpost.market.supply_packs] = purchasing[pack_ref]
+				var/pack = locate(pack_ref) in current_outpost.market.supply_packs
+				var/amount = purchasing[pack_ref]
+				for(var/i = 0; i < amount; i++)
+					unprocessed_packs += pack
 
-			current_outpost.market.make_order(usr, purchasing, return_crate_spawner())
+			current_outpost.market.make_order(usr, unprocessed_packs, return_crate_spawner())
 
 		if("mission-act")
 			var/datum/mission/mission = locate(params["ref"])
@@ -213,7 +219,11 @@
 			"discountpercent" = current_pack.faction_discount,
 			"faction_locked" = current_pack.faction_locked, //this will only show if you are same faction, so no issue
 			"ref" = REF(current_pack),
-			"desc" = (current_pack.desc || current_pack.name) + (discountedcost ? "\n-[current_pack.faction_discount]% off due to your faction affiliation.\nWas [current_pack.cost]" : "") + (current_pack.faction_locked ? "\nYou are able to purchase this item due to your faction affiliation." : ""), // If there is a description, use it. Otherwise use the pack's name.
+
+			// If there is a description, use it. Otherwise use the pack's name.
+			"desc" = (current_pack.desc || current_pack.name) \
+				+ (current_pack.faction_locked ? "\nYou are able to purchase this item due to your faction affiliation." : "") \
+				+ (discountedcost ? "\n[-current_pack.faction_discount]% [current_pack.faction_discount > 0 ? "off" : "upcharge"] due to your faction affiliation.\nWas [current_pack.cost]" : ""),
 			"no_bundle" = current_pack.no_bundle
 		)
 

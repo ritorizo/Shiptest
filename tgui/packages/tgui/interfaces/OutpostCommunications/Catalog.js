@@ -13,6 +13,7 @@ import {
   Table,
   Tabs,
   Collapsible,
+  Tooltip,
 } from '../../components';
 import { formatMoney } from '../../format';
 
@@ -125,24 +126,34 @@ export const CargoCatalog = (props, context) => {
         {itemCount !== 0 ? (
           <Collapsible title="Cart Contents">
             <Table>
-              {Object.entries(cart).map(([pack_ref, count]) => [all_packs[pack_ref],count]).map(([pack, count]) => {
+              {Object.entries(cart).map(([pack_ref, count]) => {
+                const pack = all_packs[pack_ref];
+                const actualcost = pack.discountedcost ? pack.discountedcost : pack.cost;
                 return (
-                <Table.Row key={pack} className="candystripe">
+                <Table.Row key={pack_ref} className="candystripe">
                   <Table.Cell>
                     <Button
                       icon="times"
-                      onClick = {() => setPack(pack.ref, 0)}
+                      color="transparent"
+                      onClick = {() => setPack(pack_ref, 0)}
                     />
-                    <NumberInput
+                    <Input
                       width="40px"
                       value={count}
-                      onChange={(e, value) => setPack(pack.ref, value)}
+                      textAlign="right"
+                      onChange={ (e, value) => {
+                        if (!isNaN(value) && value !== '') {
+                          setPack(pack_ref, Number(value));
+                        }
+                      }}
                     />
-                    {(pack.discountedcost ? pack.discountedcost : pack.cost)*count +
-                      ' cr'}
                   </Table.Cell>
-                  <Table.Cell collapsing color="label" textAlign="right">
-                    {pack.name}
+                  <Table.Cell textAlign="right">
+                    <Tooltip content={formatMoney(actualcost) + " cr per unit."} position="right"><Box>{formatMoney(actualcost*count) + ' cr'}</Box></Tooltip>
+                  </Table.Cell>
+                  <Table.Cell width="3%" />
+                  <Table.Cell collapsing color="label" textAlign="left" width="70%">
+                    <Tooltip content={pack.desc} position="bottom"><Box> {pack.name}  </Box></Tooltip>
                   </Table.Cell>
                 </Table.Row>
                 )
@@ -247,10 +258,10 @@ export const CargoCatalog = (props, context) => {
                         onClick={() => addPack(pack.ref)}
                       >
                         {pack.discountedcost
-                          ? ' (-' +
-                            pack.discountpercent +
+                          ? ' (' +
+                            (pack.discountpercent > 0 ? "-" + pack.discountpercent : "+" + (-pack.discountpercent)) +
                             '%) ' +
-                            pack.discountedcost
+                            formatMoney(pack.discountedcost)
                           : formatMoney(
                               (self_paid && !pack.goody) || app_cost
                                 ? Math.round(pack.cost * 1.1)
